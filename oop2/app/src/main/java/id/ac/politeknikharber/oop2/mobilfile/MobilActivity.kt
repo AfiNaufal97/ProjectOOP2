@@ -29,6 +29,7 @@ class MobilActivity : AppCompatActivity() {
         recylerViewMobil()
     }
 
+    // read data
     override fun onStart() {
         super.onStart()
         CoroutineScope(Dispatchers.IO).launch {
@@ -40,6 +41,7 @@ class MobilActivity : AppCompatActivity() {
         }
     }
 
+    // data dalam database
     private fun dataMobil(){
         CoroutineScope(Dispatchers.IO).launch {
             dbMobil.mobilDao().insertMobil(
