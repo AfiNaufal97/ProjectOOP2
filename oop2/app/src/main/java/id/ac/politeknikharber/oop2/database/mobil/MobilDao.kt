@@ -3,20 +3,25 @@ package id.ac.politeknikharber.oop2.database.mobil
 import androidx.room.*
 
 @Dao
-interface MobilDao{
+interface MobilDao {
     @Query("SELECT * FROM mobil")
-    fun selectAll():List<Mobil>
+    suspend fun selectAllMobil():List<Mobil>
 
     @Query("SELECT * FROM mobil WHERE id=:id")
-    fun selectAll(id:Int):List<Mobil>
+    suspend fun selectMobilById(id:Int):List<Mobil>
+
+    @Query("SELECT * FROM mobil WHERE jenis_mobil=:jenis")
+    suspend fun selectMObilByJenis(jenis:String):List<Mobil>
+
+    @Query("SELECT * FROM mobil WHERE kapasitas=:kapasitas")
+    suspend fun selectMobilByKapasitas(kapasitas:Int):List<Mobil>
 
     @Insert
-    fun insert(data:Mobil)
-
-    @Delete
-    fun delete(data:Mobil)
+    suspend fun insertMobil(mobil:Mobil)
 
     @Update
-    fun update(data:Mobil)
+    suspend fun updateMobil(mobil:Mobil)
 
+    @Delete
+    suspend fun deleteMobil(mobil:Mobil)
 }
