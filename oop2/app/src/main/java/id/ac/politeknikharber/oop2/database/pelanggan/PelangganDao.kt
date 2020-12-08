@@ -4,18 +4,15 @@ import androidx.room.*
 
 @Dao
 interface PelangganDao {
-    @Query("SELECT * FROM pelanggan")
-    fun selectAllPel():List<Pelanggan>
-
-    @Query("SELECT * FROM pelanggan WHERE id = :id")
-    fun selectPelById(id:Int)
+    @Query("SELECT * FROM user")
+    suspend fun selectAllPelanggan():List<User>
 
     @Insert
-    fun insertPel(data:Pelanggan)
+    suspend fun insertPelanggan(user:User)
 
     @Update
-    fun updatePel(data:Pelanggan)
+    suspend fun updatePelanggan(user:User)
 
     @Delete
-    fun deletePel(data:Pelanggan)
+    suspend fun deletePelanggan(user:User)
 }
