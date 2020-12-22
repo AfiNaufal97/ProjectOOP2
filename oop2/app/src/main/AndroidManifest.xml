@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Oop2">
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".filepengguna.PelangganActivity"/>
+        <activity android:name=".mobilfile.TambahMobilActivity"
+            android:theme="@style/Theme.AppCompat.Light"/>
+        <activity android:name=".filepengguna.TambahPalangganActivity"/>
+        <activity android:name=".mobilfile.MobilActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
