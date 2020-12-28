@@ -70,10 +70,10 @@ class MobilActivity : AppCompatActivity(){
 //                Toast.makeText(applicationContext, "Read", Toast.LENGTH_SHORT).show()
             }
 
-//            override fun klikEdit(mobil: Mobil) {
-//                tampilkanData(mobil.id, ConstPilihan.UPDATE_DATA)
-////                Toast.makeText(applicationContext, "Edit", Toast.LENGTH_SHORT).show()
-//            }
+            override fun klikEdit(mobil: Mobil) {
+                tampilkanData(mobil.id, ConstPilihan.UPDATE_DATA)
+//                Toast.makeText(applicationContext, "Edit", Toast.LENGTH_SHORT).show()
+            }
 
             // fungsi delete
             override fun klikDelete(mobil: Mobil) {
