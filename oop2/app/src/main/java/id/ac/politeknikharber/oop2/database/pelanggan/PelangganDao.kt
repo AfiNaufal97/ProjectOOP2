@@ -4,15 +4,15 @@ import androidx.room.*
 
 @Dao
 interface PelangganDao {
-    @Query("SELECT * FROM user")
-    suspend fun selectAllPelanggan():List<User>
+    @Query("SELECT * FROM pelanggan")
+    suspend fun selectAllPelanggan():List<Pelanggan>
 
     @Insert
-    suspend fun insertPelanggan(user:User)
+    suspend fun insertPelanggan(user:Pelanggan)
 
     @Update
-    suspend fun updatePelanggan(user:User)
+    suspend fun updatePelanggan(user:Pelanggan)
 
     @Delete
-    suspend fun deletePelanggan(user:User)
+    suspend fun deletePelanggan(user:Pelanggan)
 }
