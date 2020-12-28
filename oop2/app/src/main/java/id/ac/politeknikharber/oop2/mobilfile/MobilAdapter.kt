@@ -14,7 +14,7 @@ class MobilAdapter(private val dataMobil:ArrayList<Mobil>, val onclickItem:OnCli
 
     interface OnClickItem{
         fun klikItem(mobil:Mobil)
-//        fun klikEdit(mobil:Mobil)
+        fun klikEdit(mobil:Mobil)
         fun klikDelete(mobil:Mobil)
     }
 
@@ -35,9 +35,9 @@ class MobilAdapter(private val dataMobil:ArrayList<Mobil>, val onclickItem:OnCli
             onclickItem.klikItem(isiDataMobil)
         }
 
-//        holder.itemView.btn_edit_mobil.setOnClickListener {
-//            onclickItem.klikEdit(isiDataMobil)
-//        }
+        holder.itemView.btn_edit_mobil.setOnClickListener {
+            onclickItem.klikEdit(isiDataMobil)
+        }
 
         holder.itemView.btn_hps_mobil.setOnClickListener {
             onclickItem.klikDelete(isiDataMobil)
