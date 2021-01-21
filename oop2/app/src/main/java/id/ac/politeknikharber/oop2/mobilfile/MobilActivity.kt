@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.*
 import id.ac.politeknikharber.oop2.R
 import id.ac.politeknikharber.oop2.database.RentalDatabase
 import id.ac.politeknikharber.oop2.database.mobil.Mobil
@@ -24,18 +26,61 @@ import kotlinx.coroutines.withContext
 class MobilActivity : AppCompatActivity(){
 
     // import database
-    val dbMobil by lazy {
-        RentalDatabase(this)
-    }
+    private lateinit var dbMobil:RentalDatabase
+
+    lateinit var databse:FirebaseDatabase
+    lateinit var reference:DatabaseReference
 
     private lateinit var adapterMobil:MobilAdapter
+    lateinit var dataMobil:List<Mobil>
+    lateinit var destinationList:MutableList<Mobil>
+    lateinit var rev :RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mobil)
+        reference = FirebaseDatabase.getInstance().reference
+//        reference = databse.getReference("mobil")
+        dbMobil = RentalDatabase(this)
+
         recylerViewMobil()
         tambahData()
+        sinkronisasi()
     }
+
+    private fun sinkronisasi(){
+        destinationList = ArrayList<Mobil>()
+        float_sinkron_mobil.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val dataMobil = dbMobil.mobilDao().selectAllMobil()
+                if(dataMobil.isNotEmpty()) {
+                    val mobilId = "mobil"
+                    val model = dataMobil
+                    reference.child(mobilId).setValue(model)
+                }else{
+                    reference.addValueEventListener(object :ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for(i in snapshot.children){
+                                val isi = i.getValue(Mobil::class.java)
+                                if(isi != null){
+                                    destinationList.add(isi)
+                                }
+                            }
+
+//                            layoutManager = LinearLayoutManager(applicationContext)
+//                            adapter = adapterMobil
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
+                }
+            }
+        }
+    }
+
 
     // menampilkan hasil tambah data
     override fun onStart() {
