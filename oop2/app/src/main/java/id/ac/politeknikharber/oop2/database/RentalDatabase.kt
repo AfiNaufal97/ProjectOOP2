@@ -12,13 +12,12 @@ import id.ac.politeknikharber.oop2.database.pelanggan.PelangganDao
 @Database(entities = [Mobil::class, Pelanggan::class], version=1, exportSchema = false)
 
 abstract class RentalDatabase:RoomDatabase(){
-
     abstract fun mobilDao():MobilDao
     abstract fun pelangganDao():PelangganDao
 
     companion object{
         @Volatile
-        var instance:RentalDatabase? =null
+        var instance:RentalDatabase? = null
         val LOCK = Any()
 
         operator fun invoke(context: Context)= instance?: synchronized(LOCK){
